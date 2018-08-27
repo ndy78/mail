@@ -55,20 +55,23 @@ class MailManager implements IMailManager {
 	/** @var MessageMapper */
 	private $messageMapper;
 
-	/**
-	 * @param IMAPClientFactory $imapClientFactory
-	 * @param FolderMapper $folderMapper
-	 * @param MailboxPrefixDetector $prefixDetector
-	 * @param FolderNameTranslator $folderNameTranslator
-	 * @param Synchronizer $synchronizer
-	 * @param MessageMapper $messageMapper
-	 */
+    /**
+     * @param IMAPClientFactory $imapClientFactory
+     * @param FolderMapper $folderMapper
+     * @param MailboxPrefixDetector $prefixDetector
+     * @param FolderNameTranslator $folderNameTranslator
+     * @param Synchronizer $synchronizer
+     * @param MessageMapper $messageMapper
+     * @param ILogger $ILogger
+     */
 	public function __construct(IMAPClientFactory $imapClientFactory,
 								FolderMapper $folderMapper,
 								MailboxPrefixDetector $prefixDetector,
 								FolderNameTranslator $folderNameTranslator,
 								Synchronizer $synchronizer,
-								MessageMapper $messageMapper) {
+								MessageMapper $messageMapper
+
+    ) {
 		$this->imapClientFactory = $imapClientFactory;
 		$this->folderMapper = $folderMapper;
 		$this->prefixDetector = $prefixDetector;
@@ -83,7 +86,6 @@ class MailManager implements IMailManager {
 	 */
 	public function getFolders(Account $account): array {
 		$client = $this->imapClientFactory->getClient($account);
-
 		$folders = $this->folderMapper->getFolders($account, $client);
 		$havePrefix = $this->prefixDetector->havePrefix($folders);
 		$this->folderMapper->getFoldersStatus($folders, $client);
