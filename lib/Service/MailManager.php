@@ -62,16 +62,13 @@ class MailManager implements IMailManager {
      * @param FolderNameTranslator $folderNameTranslator
      * @param Synchronizer $synchronizer
      * @param MessageMapper $messageMapper
-     * @param ILogger $ILogger
      */
 	public function __construct(IMAPClientFactory $imapClientFactory,
 								FolderMapper $folderMapper,
 								MailboxPrefixDetector $prefixDetector,
 								FolderNameTranslator $folderNameTranslator,
 								Synchronizer $synchronizer,
-								MessageMapper $messageMapper
-
-    ) {
+								MessageMapper $messageMapper) {
 		$this->imapClientFactory = $imapClientFactory;
 		$this->folderMapper = $folderMapper;
 		$this->prefixDetector = $prefixDetector;
